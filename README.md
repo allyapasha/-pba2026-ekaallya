@@ -9,7 +9,7 @@ Proyek ini bertujuan untuk melakukan klasifikasi sentimen pada teks berbahasa In
 | Nama | NIM | GitHub |
 |------|-----|--------|
 | Allya Nurul Islami Pasha | 122450033 | @allyapasha |
-| Eka Fidiya Putri | 12245004 | @eka409 |
+| Eka Fidiya Putri | 122450045 | @eka409 |
 
 
 ## Dataset
