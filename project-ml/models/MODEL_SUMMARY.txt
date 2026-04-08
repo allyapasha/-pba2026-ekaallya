@@ -1,6 +1,5 @@
 
 SENTIMENT ANALYSIS MODEL SUMMARY
-================================
 
 DATASET:
   - Records: 707
