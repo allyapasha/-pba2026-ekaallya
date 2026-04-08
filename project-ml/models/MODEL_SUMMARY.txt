@@ -1,0 +1,25 @@
+
+SENTIMENT ANALYSIS MODEL SUMMARY
+================================
+
+DATASET:
+  - Records: 707
+  - Features: 21
+  - Sentiment distribution: {'neutral': 538, 'positive': 147, 'negative': 22}
+
+PREPROCESSING:
+  - Text cleaning: 7 steps
+  - Slang mappings: 16+
+  - Leetspeak mappings: 11
+
+MODEL:
+  - Algorithm: Random Forest
+  - Accuracy: 0.8310
+  - Train: 565, Test: 142
+
+FILES:
+  - Cleaned data: C:\Users\ASUS\Downloads\Folder Baru (2)\pba\project-ml\data\processed\clean_data.csv
+  - Model: C:\Users\ASUS\Downloads\Folder Baru (2)\pba\project-ml\models\sentiment_model.pkl
+  - Vectorizer: C:\Users\ASUS\Downloads\Folder Baru (2)\pba\project-ml\models\tfidf_vectorizer.pkl
+  - Encoder: C:\Users\ASUS\Downloads\Folder Baru (2)\pba\project-ml\models\label_encoder.pkl
+  - Scaler: C:\Users\ASUS\Downloads\Folder Baru (2)\pba\project-ml\models\scaler.pkl

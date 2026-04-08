@@ -1,0 +1,7 @@
+pycaret
+gradio>=4.0.0
+pandas
+scikit-learn
+numpy
+matplotlib
+seaborn
