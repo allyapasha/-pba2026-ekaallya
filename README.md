@@ -1,34 +1,73 @@
 ﻿# Sentiment Analysis Indonesian
 
-Repository ini berisi sistem analisis sentimen 3 kelas untuk teks bahasa Indonesia dengan jalur production yang sudah dipisahkan dari jalur eksperimen.
+Repository ini berisi sistem analisis sentimen 3 kelas untuk teks bahasa Indonesia dengan struktur production-first. Jalur machine learning dipakai sebagai deployment utama, sementara jalur deep learning dipertahankan sebagai baseline eksperimen yang terpisah.
 
-Output model selalu memakai tiga label:
+## Ringkasan Cepat
 
-- `positive`
-- `negative`
-- `neutral`
-
-## Production Summary
-
-Jalur production aktif memakai:
-
-- model `LogisticRegression`
-- fitur teks `TF-IDF` unigram dan bigram
-- fitur numerik sederhana
-- artefak yang dipaketkan untuk app lokal dan Hugging Face Space
-
-Jalur ini dipilih sebagai default karena lebih ringan, lebih mudah dirawat, dan sudah terhubung ke app serta paket deploy.
+| Area | Jalur Utama |
+| --- | --- |
+| Output | `positive`, `negative`, `neutral` |
+| Model production | `LogisticRegression` + `TF-IDF` + fitur numerik |
+| App lokal | `apps/local/app.py` |
+| Deploy production | `apps/hf_space/` |
+| Training production | `pipelines/classic_ml/train.py` |
+| Artefak production | `artifacts/classic_ml/` |
+| Eksperimen | `pipelines/deep_learning/` |
+| Folder legacy | `project-ml/` |
 
 ## Demo Online
 
-Versi yang tersedia di Hugging Face Space:
+| Jalur | Link |
+| --- | --- |
+| Machine learning production | `https://huggingface.co/spaces/ekaallya/sentiment-analysis-indonesian` |
+| Deep learning experiment | `https://huggingface.co/spaces/ekaallya/sentiment-analysis-indonesian-deep-learning` |
 
-- Machine learning production: `https://huggingface.co/spaces/ekaallya/sentiment-analysis-indonesian`
-- Deep learning experiment: `https://huggingface.co/spaces/ekaallya/sentiment-analysis-indonesian-deep-learning`
+Jalur machine learning adalah deploy utama. Jalur deep learning dipakai untuk pembanding eksperimen dan tidak menjadi default production.
 
-Jalur machine learning adalah deploy utama, sedangkan jalur deep learning dipertahankan sebagai pembanding eksperimen.
+## Arsitektur Model
 
-## Repository Structure
+| Jalur | Status | Model | Tujuan |
+| --- | --- | --- | --- |
+| Classic ML | Production | `LogisticRegression` | Dipakai untuk app lokal dan Hugging Face Space utama |
+| Deep Learning | Experiment | `MLPClassifier` | Dipakai sebagai baseline eksperimen terpisah |
+
+## Metrics
+
+| Jalur | Accuracy | F1 Weighted | F1 Macro |
+| --- | --- | --- | --- |
+| Production classic ML | `0.8099` | `0.7951` | `0.6857` |
+| Deep learning baseline | `0.8451` | `0.8304` | `0.7263` |
+
+Walau baseline eksperimen memiliki metrik lebih tinggi, jalur production tetap memakai model klasik karena lebih ringan, lebih mudah dirawat, dan sudah stabil untuk deploy.
+
+## Quick Start
+
+Install dependency:
+
+```powershell
+python -m pip install -r .\project-ml\app\requirements.txt
+```
+
+Refresh artefak production:
+
+```powershell
+python .\run_simple_pipeline.py
+```
+
+Jalankan validasi ringan:
+
+```powershell
+python .\validate_local_system.py
+python -m validation.smoke_test
+```
+
+Jalankan app lokal:
+
+```powershell
+python .\apps\local\app.py
+```
+
+## Struktur Repository
 
 ```text
 .
@@ -62,15 +101,7 @@ Jalur machine learning adalah deploy utama, sedangkan jalur deep learning dipert
     `-- entrypoint kompatibel untuk validasi lokal
 ```
 
-## Active Production Flow
-
-1. Training production dijalankan dari `python .\run_simple_pipeline.py`.
-2. Artefak aktif disimpan di `artifacts/classic_ml/`.
-3. App lokal memakai `apps/local/app.py`.
-4. Paket deploy Hugging Face Space memakai `apps/hf_space/`.
-5. Validasi ringan dijalankan dengan `python .\validate_local_system.py` atau `python -m validation.smoke_test`.
-
-## Main Directories
+## Navigasi Folder
 
 ### `src/sentiment_project/`
 Pusat logika bersama untuk:
@@ -106,7 +137,7 @@ Folder deploy production untuk Hugging Face Space. Isi folder ini sudah disusun 
 Tempat utilitas operasional yang tidak perlu memenuhi root repo. Wrapper root tetap dipertahankan hanya untuk kompatibilitas.
 
 ### `project-ml/`
-Folder legacy yang dipertahankan untuk kebutuhan:
+Folder legacy yang dipertahankan untuk:
 
 - dataset mentah dan hasil preprocessing
 - notebook EDA dan modeling
@@ -127,49 +158,6 @@ Catatan penting:
 - dataset asli berisi label emosi granular yang dipetakan ke `positive`, `negative`, dan `neutral`
 - audit singkat dataset tersedia di `docs/dataset_audit.md`
 
-## Metrics
-
-Model production aktif:
-
-- accuracy: `0.8099`
-- f1 weighted: `0.7951`
-- f1 macro: `0.6857`
-
-Baseline eksperimen:
-
-- accuracy: `0.8451`
-- f1 weighted: `0.8304`
-- f1 macro: `0.7263`
-
-Walau baseline eksperimen lebih tinggi, production tetap memakai model klasik karena jalur deploy dan operasionalnya lebih sederhana dan sudah stabil.
-
-## Local Usage
-
-Install dependency app:
-
-```powershell
-python -m pip install -r .\project-ml\app\requirements.txt
-```
-
-Refresh artefak production:
-
-```powershell
-python .\run_simple_pipeline.py
-```
-
-Jalankan smoke test:
-
-```powershell
-python .\validate_local_system.py
-python -m validation.smoke_test
-```
-
-Jalankan app lokal:
-
-```powershell
-python .\apps\local\app.py
-```
-
 ## Deployment
 
 Deploy production untuk Hugging Face Space memakai folder:
@@ -178,13 +166,7 @@ Deploy production untuk Hugging Face Space memakai folder:
 
 Panduan deploy ringkas tersedia di `docs/deployment_hf_space.md`.
 
-## Operational Scripts
-
-Script operasional non-core ditempatkan di `scripts/`, sementara file root hanya menyisakan wrapper kompatibilitas bila masih dibutuhkan.
-
-## Documentation
-
-Dokumentasi yang dipertahankan untuk repo production:
+## Dokumentasi Terkait
 
 - `docs/README.md`
 - `docs/dataset_audit.md`
@@ -195,9 +177,9 @@ Dokumentasi yang dipertahankan untuk repo production:
 - `artifacts/README.md`
 - `scripts/README.md`
 
-## Status
+## Status Repository
 
-Repository ini sudah disusun sebagai repo production-first.
+Repository ini sudah disusun agar lebih rapi saat dibuka di GitHub.
 
 - production path jelas
 - eksperimen dipisahkan
