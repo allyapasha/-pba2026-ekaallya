@@ -2,6 +2,13 @@
 
 Repository ini berisi sistem analisis sentimen 3 kelas untuk teks bahasa Indonesia dengan struktur production-first. Jalur machine learning dipakai sebagai deployment utama, sementara jalur deep learning dipertahankan sebagai baseline eksperimen yang terpisah.
 
+## Penulis
+
+| Nama | NIM |
+| --- | --- |
+| Allya Nurul Islami Pasha | 122450033 |
+| Eka Fidiya Putri | 122450045 |
+
 ## Ringkasan Cepat
 
 | Area | Jalur Utama |
@@ -186,3 +193,5 @@ Repository ini sudah disusun agar lebih rapi saat dibuka di GitHub.
 - folder legacy diberi batas peran yang jelas
 - script utilitas dipindahkan dari root ke folder yang lebih sesuai
 - dokumentasi internal proses kerja yang tidak relevan sudah dihapus dari root repo
+
+
