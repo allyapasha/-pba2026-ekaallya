@@ -64,6 +64,7 @@ python .\run_simple_pipeline.py
 Jalankan validasi ringan:
 
 ```powershell
+python .\scripts\sync_space_assets.py
 python .\validate_local_system.py
 python -m validation.smoke_test
 ```

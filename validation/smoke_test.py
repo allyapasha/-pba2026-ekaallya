@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from src.sentiment_project.inference import load_classic_artifacts
 from apps.local.app import predict_sentiment
+from validation.space_asset_check import main as check_space_assets
 
 
 def main() -> None:
@@ -17,6 +18,7 @@ def main() -> None:
         prediction = predict_sentiment(text)
         print(f"  {text} -> {prediction}")
 
+    check_space_assets()
     print("Local system validation completed.")
 
 

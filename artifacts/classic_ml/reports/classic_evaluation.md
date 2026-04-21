@@ -2,17 +2,17 @@
 
 ## Ringkasan
 - Model: `LogisticRegression`
-- Accuracy: `0.8099`
-- F1 weighted: `0.7951`
-- F1 macro: `0.6857`
+- Accuracy: `0.8028`
+- F1 weighted: `0.8003`
+- F1 macro: `0.7276`
 - Distribusi kelas: `{'positive': 459, 'negative': 188, 'neutral': 60}`
 
 ## Confusion Matrix
 | actual \ predicted | negative | neutral | positive |
 | --- | ---: | ---: | ---: |
-| negative | 24 | 0 | 14 |
-| neutral | 1 | 4 | 7 |
-| positive | 4 | 1 | 87 |
+| negative | 26 | 0 | 12 |
+| neutral | 2 | 7 | 3 |
+| positive | 7 | 4 | 81 |
 
 ## Analisis
 - Model sebelumnya bias ke `positive` karena distribusi label sangat timpang dan Random Forest cenderung mengikuti kelas mayoritas.

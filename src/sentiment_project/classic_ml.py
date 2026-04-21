@@ -69,7 +69,7 @@ def train_classic_model():
     model = LogisticRegression(
         max_iter=2000,
         class_weight="balanced",
-        solver="liblinear",
+        solver="lbfgs",
         C=2.0,
         random_state=42,
     )
@@ -124,6 +124,7 @@ def build_classic_summary(metrics: dict) -> str:
         "MODEL PRODUCTION:",
         "  - Algorithm: Logistic Regression",
         "  - Strategy: class_weight=balanced",
+        "  - Multiclass setup: multinomial + lbfgs",
         "  - Vectorizer: TF-IDF 1-2 gram, max_features=3000, sublinear_tf=True",
         f"  - Numeric features: {NUMERIC_FEATURE_COLUMNS}",
         f"  - Classes: {metrics['classes']}",
