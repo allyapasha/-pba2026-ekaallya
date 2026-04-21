@@ -18,6 +18,7 @@ Space ini adalah versi eksperimen deep learning ringan untuk sentiment analysis 
 - `MLPClassifier`
 - input teks dibersihkan dengan preprocessing Indonesia yang sama
 - output tetap `positive`, `negative`, `neutral`
+- file model di paket Space disimpan sebagai `sentiment_model.pkl` agar kompatibel dengan script upload
 
 ## Catatan
 

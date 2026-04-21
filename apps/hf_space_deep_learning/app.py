@@ -11,7 +11,7 @@ import numpy as np
 APP_DIR = Path(__file__).resolve().parent
 NUMERIC_FEATURE_COLUMNS = ["text_length_words", "engagement_total", "hashtag_count"]
 ARTIFACT_FILENAMES = {
-    "model": "mlp_model.pkl",
+    "model": "sentiment_model.pkl",
     "vectorizer": "tfidf_vectorizer.pkl",
     "label_encoder": "label_encoder.pkl",
     "scaler": "scaler.pkl",
