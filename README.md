@@ -19,6 +19,15 @@ Jalur production aktif memakai:
 
 Jalur ini dipilih sebagai default karena lebih ringan, lebih mudah dirawat, dan sudah terhubung ke app serta paket deploy.
 
+## Demo Online
+
+Versi yang tersedia di Hugging Face Space:
+
+- Machine learning production: `https://huggingface.co/spaces/ekaallya/sentiment-analysis-indonesian`
+- Deep learning experiment: `https://huggingface.co/spaces/ekaallya/sentiment-analysis-indonesian-deep-learning`
+
+Jalur machine learning adalah deploy utama, sedangkan jalur deep learning dipertahankan sebagai pembanding eksperimen.
+
 ## Repository Structure
 
 ```text
@@ -37,12 +46,18 @@ Jalur ini dipilih sebagai default karena lebih ringan, lebih mudah dirawat, dan 
 |   `-- paket deploy production untuk Hugging Face Space
 |-- docs/
 |   `-- dokumentasi operasional dan audit yang relevan
+|-- scripts/
+|   `-- utilitas operasional seperti upload ke Hugging Face Space
 |-- validation/
 |   `-- smoke test lokal
 |-- project-ml/
 |   `-- folder legacy untuk dataset, notebook, dan wrapper kompatibilitas
 |-- run_simple_pipeline.py
 |   `-- entrypoint kompatibel untuk training production
+|-- run_pipeline.py
+|   `-- alias lama yang kini diarahkan ke training production
+|-- upload_to_hf_space.py
+|   `-- wrapper kompatibilitas untuk script deploy
 `-- validate_local_system.py
     `-- entrypoint kompatibel untuk validasi lokal
 ```
@@ -67,7 +82,7 @@ Pusat logika bersama untuk:
 - inference helper
 
 ### `pipelines/classic_ml/`
-Pipeline training yang dipakai production. Wrapper root `run_simple_pipeline.py` mengarah ke sini.
+Pipeline training yang dipakai production. Wrapper root `run_simple_pipeline.py` dan `run_pipeline.py` mengarah ke sini.
 
 ### `pipelines/deep_learning/`
 Baseline eksperimen untuk pembanding performa. Folder ini tidak menjadi jalur deploy default.
@@ -86,6 +101,9 @@ App lokal production untuk inferensi manual dan smoke testing cepat.
 
 ### `apps/hf_space/`
 Folder deploy production untuk Hugging Face Space. Isi folder ini sudah disusun agar bisa dipush sebagai Space terpisah.
+
+### `scripts/`
+Tempat utilitas operasional yang tidak perlu memenuhi root repo. Wrapper root tetap dipertahankan hanya untuk kompatibilitas.
 
 ### `project-ml/`
 Folder legacy yang dipertahankan untuk kebutuhan:
@@ -160,6 +178,10 @@ Deploy production untuk Hugging Face Space memakai folder:
 
 Panduan deploy ringkas tersedia di `docs/deployment_hf_space.md`.
 
+## Operational Scripts
+
+Script operasional non-core ditempatkan di `scripts/`, sementara file root hanya menyisakan wrapper kompatibilitas bila masih dibutuhkan.
+
 ## Documentation
 
 Dokumentasi yang dipertahankan untuk repo production:
@@ -168,6 +190,10 @@ Dokumentasi yang dipertahankan untuk repo production:
 - `docs/dataset_audit.md`
 - `docs/classic_vs_deep_learning.md`
 - `docs/deployment_hf_space.md`
+- `apps/README.md`
+- `pipelines/README.md`
+- `artifacts/README.md`
+- `scripts/README.md`
 
 ## Status
 
@@ -176,4 +202,5 @@ Repository ini sudah disusun sebagai repo production-first.
 - production path jelas
 - eksperimen dipisahkan
 - folder legacy diberi batas peran yang jelas
+- script utilitas dipindahkan dari root ke folder yang lebih sesuai
 - dokumentasi internal proses kerja yang tidak relevan sudah dihapus dari root repo

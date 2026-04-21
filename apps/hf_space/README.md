@@ -17,6 +17,10 @@ Space ini memakai model production aktif dari repository utama dengan output tig
 - `negative`
 - `neutral`
 
+## Space Link
+
+- Space machine learning production: `https://huggingface.co/spaces/ekaallya/sentiment-analysis-indonesian`
+
 ## Active Model
 
 Model yang dipakai untuk deploy ini:
@@ -25,7 +29,9 @@ Model yang dipakai untuk deploy ini:
 - `TF-IDF`
 - fitur numerik sederhana
 
-Jalur deep learning tidak dipakai sebagai deploy default.
+Jalur deep learning tidak dipakai sebagai deploy default. Versi eksperimennya tersedia di:
+
+- `https://huggingface.co/spaces/ekaallya/sentiment-analysis-indonesian-deep-learning`
 
 ## Minimum Files
 

@@ -1,4 +1,4 @@
----
+﻿---
 title: Sentiment Analysis Indonesian Deep Learning
 emoji: 🧠
 colorFrom: green
@@ -13,7 +13,12 @@ pinned: false
 
 Space ini adalah versi eksperimen deep learning ringan untuk sentiment analysis bahasa Indonesia.
 
-## Model aktif
+## Space Link
+
+- Space deep learning experiment: `https://huggingface.co/spaces/ekaallya/sentiment-analysis-indonesian-deep-learning`
+- Space machine learning production: `https://huggingface.co/spaces/ekaallya/sentiment-analysis-indonesian`
+
+## Model Aktif
 
 - `MLPClassifier`
 - input teks dibersihkan dengan preprocessing Indonesia yang sama
@@ -24,3 +29,4 @@ Space ini adalah versi eksperimen deep learning ringan untuk sentiment analysis 
 
 - Ini Space terpisah dari versi production klasik.
 - Tujuannya untuk membandingkan baseline neural dengan model production utama.
+- Jalur production default tetap memakai versi machine learning klasik.
