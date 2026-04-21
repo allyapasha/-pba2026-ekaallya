@@ -1,22 +1,23 @@
-# App Lokal
+﻿# Legacy App Wrapper
 
-Folder ini dipertahankan untuk kompatibilitas perintah lama:
+Folder ini hanya menyimpan wrapper kompatibilitas untuk perintah lama:
 
 ```powershell
 python .\project-ml\app\app.py
 ```
 
-Implementasi utama app sekarang ada di `apps/local/app.py`.
+## Status
 
-## Model Aktif
+Wrapper ini bukan implementasi production utama.
 
-- production: `LogisticRegression`
-- fitur teks: `TF-IDF`
-- fitur tambahan: panjang teks, engagement total, jumlah hashtag
-- output: probabilitas `positive`, `negative`, `neutral`
+Implementasi app yang aktif untuk repo production berada di:
 
-## Catatan
+- `apps/local/app.py`
 
-- folder deploy Hugging Face Space sekarang ada di `apps/hf_space/`
-- artefak production utama ada di `artifacts/classic_ml/`
-- `project-ml/models/` bukan lagi source of truth production
+Artefak production aktif berada di:
+
+- `artifacts/classic_ml/`
+
+Paket deploy production untuk Hugging Face Space berada di:
+
+- `apps/hf_space/`

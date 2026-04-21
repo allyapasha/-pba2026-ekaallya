@@ -1,4 +1,4 @@
----
+﻿---
 title: Sentiment Analysis Indonesian
 emoji: 📊
 colorFrom: blue
@@ -11,14 +11,25 @@ pinned: false
 
 # Sentiment Analysis Indonesian
 
-Space ini memakai model produksi klasik dengan output tiga kelas: `positive`, `negative`, dan `neutral`.
+Space ini memakai model production aktif dari repository utama dengan output tiga kelas:
 
-## Model aktif
+- `positive`
+- `negative`
+- `neutral`
 
-- Production: Logistic Regression + TF-IDF + fitur numerik sederhana
-- Eksperimen: baseline neural ringan ada di `artifacts/deep_learning/`, tidak dipakai Space
+## Active Model
 
-## Isi minimum saat push ke Space
+Model yang dipakai untuk deploy ini:
+
+- `LogisticRegression`
+- `TF-IDF`
+- fitur numerik sederhana
+
+Jalur deep learning tidak dipakai sebagai deploy default.
+
+## Minimum Files
+
+Folder Space ini harus berisi:
 
 - `app.py`
 - `README.md`
@@ -28,5 +39,4 @@ Space ini memakai model produksi klasik dengan output tiga kelas: `positive`, `n
 - `label_encoder.pkl`
 - `scaler.pkl`
 
-Artefak dapat diletakkan langsung di root Space atau di folder `models/`.
-
+Artefak boleh berada langsung di root Space atau di folder `models/`.
