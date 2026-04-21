@@ -1,4 +1,4 @@
-# Perbandingan Model Klasik vs Deep Learning
+# Perbandingan Model Klasik vs Baseline Neural
 
 ## Model Klasik Production
 
@@ -20,7 +20,7 @@ Kekurangan:
 - masih sensitif terhadap distribusi label yang timpang
 - perlu penyesuaian inferensi agar contoh Indonesia sederhana tidak terlalu bias
 
-## Baseline Neural
+## Baseline Neural Eksperimen
 
 - Algoritma: `MLPClassifier`
 - Fitur: `TF-IDF` + fitur numerik sederhana
@@ -36,6 +36,7 @@ Kelebihan:
 Kekurangan:
 
 - belum sequence-aware seperti LSTM atau transformer
+- environment lokal saat ini belum menyediakan PyTorch atau TensorFlow
 - belum diaudit untuk jalur deployment production
 - belum diintegrasikan ke app dan Space agar tidak menambah kompleksitas deploy
 
@@ -47,4 +48,8 @@ Kekurangan:
 ## Keputusan Prompt 2
 
 Default production tetap model klasik, walaupun baseline neural lebih tinggi, karena target Prompt 2 adalah repo yang stabil, rapi, dan siap deploy. Jalur neural dipisahkan agar eksperimen bisa lanjut tanpa mengganggu app yang sudah berjalan.
+
+## Catatan Terminologi
+
+Folder `deep_learning/` dipertahankan untuk konsistensi struktur eksperimen, tetapi baseline yang aktif saat ini adalah neural baseline ringan berbasis `MLPClassifier`. Ini adalah langkah transisi yang jujur secara teknis sampai environment menyediakan dependensi deep learning penuh.
 

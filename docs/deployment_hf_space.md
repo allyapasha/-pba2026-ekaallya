@@ -23,6 +23,15 @@ Model yang dipakai Space adalah model production klasik:
 
 ## Upload Manual
 
+Sebelum upload, sinkronkan dulu paket Space dari source of truth artefak:
+
+```powershell
+python .\scripts\sync_space_assets.py
+python -m validation.space_asset_check
+```
+
+Lalu upload folder Space yang sudah sinkron.
+
 1. Login ke Hugging Face dan siapkan token akses.
 2. Set token di terminal.
 3. Upload folder `apps/hf_space/`.
@@ -41,4 +50,5 @@ python .\upload_to_hf_space.py `
 
 - jangan hardcode token di source code
 - refresh artefak production sebelum upload bila model diperbarui
+- jadikan `artifacts/classic_ml/` sebagai source of truth, bukan file yang ada langsung di folder Space
 - folder `apps/hf_space_deep_learning/` bukan jalur deploy production default

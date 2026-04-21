@@ -9,9 +9,9 @@ app_file: app.py
 pinned: false
 ---
 
-# Sentiment Analysis Indonesian Deep Learning
+# Sentiment Analysis Indonesian Neural Experiment
 
-Space ini adalah versi eksperimen deep learning ringan untuk sentiment analysis bahasa Indonesia.
+Space ini adalah versi eksperimen neural baseline untuk sentiment analysis bahasa Indonesia.
 
 ## Space Link
 
@@ -29,4 +29,6 @@ Space ini adalah versi eksperimen deep learning ringan untuk sentiment analysis 
 
 - Ini Space terpisah dari versi production klasik.
 - Tujuannya untuk membandingkan baseline neural dengan model production utama.
+- Environment lokal saat ini belum menyediakan framework seperti PyTorch atau TensorFlow.
+- Karena itu jalur ini masih berupa baseline neural ringan, belum model sequence-aware seperti LSTM.
 - Jalur production default tetap memakai versi machine learning klasik.

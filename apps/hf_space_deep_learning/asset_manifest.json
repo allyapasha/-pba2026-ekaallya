@@ -1,0 +1,7 @@
+{
+  "package": "hf_space_neural_experiment",
+  "model_family": "neural_baseline",
+  "artifacts_source": "C:\\Users\\ASUS\\Downloads\\Folder Baru (2)\\pba\\artifacts\\deep_learning",
+  "metrics_source": "C:\\Users\\ASUS\\Downloads\\Folder Baru (2)\\pba\\artifacts\\deep_learning\\reports\\deep_learning_metrics.json",
+  "compatibility_alias": "sentiment_model.pkl -> mlp_model.pkl"
+}

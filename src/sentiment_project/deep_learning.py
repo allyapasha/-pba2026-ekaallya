@@ -15,6 +15,27 @@ from .config import DEEP_LEARNING_ARTIFACTS_DIR, DEEP_LEARNING_REPORTS_DIR, RAW_
 from .shared import NUMERIC_FEATURE_COLUMNS, TARGET_COLUMN, load_sentiment_dataset, prepare_training_dataframe
 
 
+def build_neural_experiment_notes(metrics: dict) -> str:
+    return (
+        "# Baseline Neural Experiment\n\n"
+        "Jalur ini adalah baseline neural ringan yang dipisahkan dari production.\n\n"
+        "## Status\n\n"
+        "- Model: `MLPClassifier`\n"
+        "- Input: `TF-IDF` + fitur numerik sederhana\n"
+        "- Output: `positive`, `negative`, `neutral`\n"
+        "- Tujuan: pembanding eksperimen yang murah dijalankan lokal\n"
+        "- Bukan jalur deploy production default\n\n"
+        "## Catatan Penting\n\n"
+        "- Environment lokal saat ini belum menyediakan dependensi seperti PyTorch atau TensorFlow.\n"
+        "- Karena itu baseline neural memakai `MLPClassifier` sebagai eksperimen transisi, bukan sequence model seperti LSTM.\n"
+        "- Jika di iterasi berikutnya dependensi deep learning penuh tersedia, folder dan laporan ini bisa diganti dengan model sequence-aware.\n\n"
+        "## Metrics\n\n"
+        f"- Accuracy: `{metrics['accuracy']:.4f}`\n"
+        f"- F1 weighted: `{metrics['f1_weighted']:.4f}`\n"
+        f"- F1 macro: `{metrics['f1_macro']:.4f}`\n"
+    )
+
+
 def train_neural_baseline():
     ensure_repo_directories()
     df_raw = load_sentiment_dataset(RAW_DATA_PATH)
@@ -55,6 +76,8 @@ def train_neural_baseline():
     y_pred = model.predict(X_test)
     metrics = {
         "model": "MLPClassifier",
+        "experiment_type": "neural_baseline",
+        "framework_status": "no_pytorch_or_tensorflow_available",
         "classes": list(encoder.classes_),
         "accuracy": accuracy_score(y_test, y_pred),
         "f1_weighted": f1_score(y_test, y_pred, average="weighted", zero_division=0),
@@ -87,10 +110,19 @@ def save_neural_outputs(result: dict) -> None:
         json.dumps(result["metrics"], indent=2), encoding="utf-8"
     )
     (DEEP_LEARNING_REPORTS_DIR / "deep_learning_notes.md").write_text(
-        "# Baseline Deep Learning\n\n"
-        "Eksperimen Prompt 2 memakai `MLPClassifier` sebagai baseline neural ringan.\n\n"
-        "- Jalur ini dipisahkan dari production dan tidak dipakai oleh app default.\n"
-        "- Pendekatan ini belum sequence-aware seperti LSTM atau transformer.\n"
-        "- Tujuannya memberi baseline neural yang murah untuk dijalankan lokal sebelum migrasi ke model yang lebih berat.\n",
+        build_neural_experiment_notes(result["metrics"]),
+        encoding="utf-8",
+    )
+    (DEEP_LEARNING_ARTIFACTS_DIR / "EXPERIMENT_MANIFEST.json").write_text(
+        json.dumps(
+            {
+                "model_file": "mlp_model.pkl",
+                "model_type": "MLPClassifier",
+                "experiment_type": "neural_baseline",
+                "deploy_status": "non_production",
+                "notes_file": str(DEEP_LEARNING_REPORTS_DIR / "deep_learning_notes.md"),
+            },
+            indent=2,
+        ),
         encoding="utf-8",
     )
