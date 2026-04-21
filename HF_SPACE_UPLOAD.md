@@ -1,41 +1,54 @@
 # Upload Hugging Face Space
 
-Script Python untuk membuat atau memperbarui Hugging Face Space untuk proyek sentiment analysis Indonesia.
+Deploy resmi sekarang memakai folder `apps/hf_space/`.
 
-## Siapkan folder Space
+## Isi folder yang siap di-push
 
-Buat folder terpisah yang berisi file deploy final, misalnya `hf-space-sentiment-analysis-indonesian/`, lalu salin file berikut ke root folder tersebut:
+Folder `apps/hf_space/` sudah berisi:
 
-- `project-ml/app/app.py`
-- `project-ml/app/requirements.txt`
-- `project-ml/app/README.md`
-- `project-ml/models/sentiment_model.pkl`
-- `project-ml/models/tfidf_vectorizer.pkl`
-- `project-ml/models/label_encoder.pkl`
-- `project-ml/models/scaler.pkl`
+- `app.py`
+- `README.md`
+- `requirements.txt`
+- `sentiment_model.pkl`
+- `tfidf_vectorizer.pkl`
+- `label_encoder.pkl`
+- `scaler.pkl`
 
-Catatan penting:
+Model yang dipakai Space adalah model production klasik:
 
-- Nama file artefak di folder Space harus tetap sama seperti daftar di atas.
-- `app.py` sekarang akan mencari artefak baik di root Space maupun di subfolder `models/`, jadi dua struktur itu aman.
+- `LogisticRegression`
+- `TF-IDF`
+- fitur numerik sederhana
+- penyesuaian probabilitas ringan berbasis keyword Indonesia umum saat inferensi
 
-## Jalankan upload
+Baseline neural di `artifacts/deep_learning/` tidak dipakai oleh Space.
+
+## Langkah push manual
+
+1. Login ke Hugging Face dan siapkan token akses.
+2. Set token di terminal:
 
 ```powershell
 $env:HF_TOKEN="hf_xxx"
+```
+
+3. Upload folder Space:
+
+```powershell
 python upload_to_hf_space.py `
   --username ekaallya `
   --space-name sentiment-analysis-indonesian `
-  --folder .\hf-space-sentiment-analysis-indonesian `
+  --folder .\apps\hf_space `
   --wait
 ```
 
-Contoh URL hasil:
+4. Buka hasil deploy:
 
 - Repo Space: `https://huggingface.co/spaces/ekaallya/sentiment-analysis-indonesian`
 - App: `https://ekaallya-sentiment-analysis-indonesian.hf.space`
 
-Catatan:
+## Catatan
 
-- Jangan hardcode token ke file Python. Gunakan `HF_TOKEN` atau parameter `--token`.
-- Script ini memakai `huggingface_hub`, jadi pastikan package tersebut terpasang.
+- Jangan hardcode token ke file Python. Gunakan `HF_TOKEN` atau `--token`.
+- Jika artefak model di-refresh, salin ulang artefak terbaru ke `apps/hf_space/` sebelum upload.
+- Folder deploy sekarang tidak lagi memakai snapshot lama `hf-space-sentiment-analysis-indonesian/`.

@@ -1,30 +1,22 @@
 SENTIMENT ANALYSIS MODEL SUMMARY
 
+MODEL PRODUCTION:
+  - Algorithm: Logistic Regression
+  - Strategy: class_weight=balanced
+  - Vectorizer: TF-IDF 1-2 gram, max_features=3000, sublinear_tf=True
+  - Numeric features: ['text_length_words', 'engagement_total', 'hashtag_count']
+  - Classes: ['negative', 'neutral', 'positive']
+
 DATASET:
-  - Source file: C:\Users\ASUS\Downloads\Folder Baru (2)\pba\project-ml\data\raw\sentimentdataset.csv
-  - Records: 707
-  - Features: 1003
+  - Source file: C:\Users\login\-pba2026-ekaallya-latest\project-ml\data\raw\sentimentdataset.csv
+  - Records after cleaning: 707
   - Sentiment distribution: {'positive': 459, 'negative': 188, 'neutral': 60}
 
-PREPROCESSING:
-  - Shared module: sentiment_system.py
-  - Text cleaning: lowercase, URL removal, mention removal, leetspeak normalization, slang expansion, non-letter removal, whitespace normalization
-  - Label strategy: multi-emotion labels mapped into positive/negative/neutral
-  - Numeric features: ['text_length_words', 'engagement_total', 'hashtag_count']
-
-MODEL:
-  - Algorithm: Random Forest
-  - Vectorizer: TF-IDF (1-2 grams, max_features=1000)
-  - Classes: ['negative', 'neutral', 'positive']
-  - Accuracy: 0.7042
-  - Precision: 0.7969
-  - Recall: 0.7042
-  - F1: 0.6237
-  - Train: 565, Test: 142
-
-FILES:
-  - Cleaned data: C:\Users\ASUS\Downloads\Folder Baru (2)\pba\project-ml\data\processed\clean_data.csv
-  - Model: C:\Users\ASUS\Downloads\Folder Baru (2)\pba\project-ml\models\sentiment_model.pkl
-  - Vectorizer: C:\Users\ASUS\Downloads\Folder Baru (2)\pba\project-ml\models\tfidf_vectorizer.pkl
-  - Encoder: C:\Users\ASUS\Downloads\Folder Baru (2)\pba\project-ml\models\label_encoder.pkl
-  - Scaler: C:\Users\ASUS\Downloads\Folder Baru (2)\pba\project-ml\models\scaler.pkl
+METRICS:
+  - Accuracy: 0.8099
+  - Precision weighted: 0.8110
+  - Recall weighted: 0.8099
+  - F1 weighted: 0.7951
+  - F1 macro: 0.6857
+  - Train size: 565
+  - Test size: 142
