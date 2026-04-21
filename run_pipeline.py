@@ -21,6 +21,206 @@ import pandas as pd
 
 warnings.filterwarnings("ignore")
 
+POSITIVE_SENTIMENTS = {
+    "acceptance",
+    "accomplishment",
+    "admiration",
+    "adoration",
+    "adrenaline",
+    "adventure",
+    "affection",
+    "amazement",
+    "amusement",
+    "anticipation",
+    "appreciation",
+    "arousal",
+    "awe",
+    "blessed",
+    "breakthrough",
+    "calmness",
+    "captivation",
+    "celebration",
+    "celestial wonder",
+    "charm",
+    "compassion",
+    "compassionate",
+    "confidence",
+    "confident",
+    "connection",
+    "contentment",
+    "creativity",
+    "creative inspiration",
+    "culinary adventure",
+    "culinaryodyssey",
+    "dazzle",
+    "determination",
+    "dreamchaser",
+    "ecstasy",
+    "elegance",
+    "elation",
+    "emotion",
+    "empathetic",
+    "empowerment",
+    "enchantment",
+    "energy",
+    "engagement",
+    "enjoyment",
+    "enthusiasm",
+    "euphoria",
+    "excitement",
+    "exploration",
+    "festivejoy",
+    "freedom",
+    "friendship",
+    "fulfillment",
+    "free-spirited",
+    "grandeur",
+    "grateful",
+    "gratitude",
+    "happy",
+    "happiness",
+    "harmony",
+    "heartwarming",
+    "hope",
+    "hopeful",
+    "hypnotic",
+    "iconic",
+    "imagination",
+    "immersion",
+    "inspiration",
+    "inspired",
+    "journey",
+    "innerjourney",
+    "joy",
+    "joy in baking",
+    "joyfulreunion",
+    "kind",
+    "kindness",
+    "love",
+    "marvel",
+    "mesmerizing",
+    "melodic",
+    "mindfulness",
+    "mischievous",
+    "motivation",
+    "nature's beauty",
+    "nostalgia",
+    "ocean's freedom",
+    "optimism",
+    "overjoyed",
+    "playful",
+    "playfuljoy",
+    "positive",
+    "positivity",
+    "pride",
+    "proud",
+    "radiance",
+    "reflection",
+    "relief",
+    "resilience",
+    "rejuvenation",
+    "reverence",
+    "romance",
+    "runway creativity",
+    "satisfaction",
+    "serenity",
+    "solace",
+    "spark",
+    "success",
+    "surprise",
+    "sympathy",
+    "tenderness",
+    "thrill",
+    "thrilling journey",
+    "touched",
+    "tranquility",
+    "triumph",
+    "vibrancy",
+    "whispers of the past",
+    "whimsy",
+    "winter magic",
+    "wonder",
+    "wonderment",
+    "zest",
+    "artisticburst",
+    "colorful",
+    "envisioning history",
+}
+
+NEGATIVE_SENTIMENTS = {
+    "anger",
+    "anxiety",
+    "apprehensive",
+    "bad",
+    "betrayal",
+    "bitter",
+    "bitterness",
+    "bittersweet",
+    "boredom",
+    "challenge",
+    "darkness",
+    "desolation",
+    "despair",
+    "desperation",
+    "devastated",
+    "disappointment",
+    "disappointed",
+    "disgust",
+    "dismissive",
+    "embarrassed",
+    "emotionalstorm",
+    "envious",
+    "envy",
+    "exhaustion",
+    "fear",
+    "fearful",
+    "frustrated",
+    "frustration",
+    "grief",
+    "hate",
+    "heartache",
+    "heartbreak",
+    "helplessness",
+    "intimidation",
+    "isolation",
+    "jealous",
+    "jealousy",
+    "loneliness",
+    "loss",
+    "lostlove",
+    "melancholy",
+    "miscalculation",
+    "negative",
+    "numbness",
+    "obstacle",
+    "overwhelmed",
+    "pensive",
+    "pressure",
+    "regret",
+    "resentment",
+    "ruins",
+    "sad",
+    "sadness",
+    "shame",
+    "sorrow",
+    "suffering",
+    "suspense",
+    "yearning",
+}
+
+NEUTRAL_SENTIMENTS = {
+    "ambivalence",
+    "confusion",
+    "contemplation",
+    "coziness",
+    "curiosity",
+    "indifference",
+    "intrigue",
+    "neutral",
+    "renewed effort",
+    "solitude",
+}
+
 print("\n" + "=" * 80)
 print("🚀 SENTIMENT ANALYSIS - AUTOMATED PIPELINE RUNNER")
 print("=" * 80 + "\n")
@@ -58,7 +258,8 @@ print(f"   ✓ Models directory: {MODELS_DIR}")
 
 print("\n📖 Loading raw dataset...")
 try:
-    df_raw = pd.read_csv(RAW_DATA_PATH)
+    df_raw = pd.read_csv(RAW_DATA_PATH, sep=";")
+    df_raw.columns = [str(col).strip() for col in df_raw.columns]
     print(f"   ✓ Loaded {len(df_raw):,} records with {len(df_raw.columns)} columns")
     print(f"   Columns: {list(df_raw.columns)[:5]}... (showing first 5)")
 except Exception as e:
@@ -151,13 +352,26 @@ def clean_text(text):
     return text
 
 
+def map_sentiment_label(label):
+    normalized = str(label).strip().lower()
+    if normalized in POSITIVE_SENTIMENTS:
+        return "positive"
+    if normalized in NEGATIVE_SENTIMENTS:
+        return "negative"
+    if normalized in NEUTRAL_SENTIMENTS:
+        return "neutral"
+    return "neutral"
+
+
 # Apply cleaning
 print("   • Cleaning text...")
 df_raw["cleaned_text"] = df_raw["Text"].fillna("").apply(clean_text)
+df_raw["Sentiment"] = df_raw["Sentiment"].astype(str).str.strip()
 
 # Handle missing values and duplicates
 print("   • Handling missing values...")
 df_clean = df_raw.dropna(subset=["Text", "Sentiment"]).copy()
+df_clean = df_clean[df_clean["Sentiment"].ne("")].copy()
 print(f"     - Removed {len(df_raw) - len(df_clean)} rows with missing values")
 
 print("   • Removing duplicates...")
@@ -167,16 +381,7 @@ print(f"     - Removed {duplicates_before - len(df_clean)} duplicate rows")
 
 # Group sentiment to 3 classes
 print("   • Aggregating sentiment classes...")
-sentiment_mapping = {
-    "Positive": "positive",
-    "positive": "positive",
-    "Negative": "negative",
-    "negative": "negative",
-    "Neutral": "neutral",
-    "neutral": "neutral",
-}
-df_clean["sentiment_group"] = df_clean["Sentiment"].map(sentiment_mapping)
-df_clean["sentiment_group"] = df_clean["sentiment_group"].fillna("neutral")
+df_clean["sentiment_group"] = df_clean["Sentiment"].apply(map_sentiment_label)
 
 # Feature engineering
 print("   • Engineering features...")
