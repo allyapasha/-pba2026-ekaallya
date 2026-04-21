@@ -16,7 +16,6 @@ DEEP_LEARNING_ARTIFACTS_DIR = ARTIFACTS_DIR / "deep_learning"
 CLASSIC_REPORTS_DIR = CLASSIC_ARTIFACTS_DIR / "reports"
 DEEP_LEARNING_REPORTS_DIR = DEEP_LEARNING_ARTIFACTS_DIR / "reports"
 
-LEGACY_MODELS_DIR = REPO_ROOT / "project-ml" / "models"
 LOCAL_APP_DIR = REPO_ROOT / "apps" / "local"
 HF_SPACE_DIR = REPO_ROOT / "apps" / "hf_space"
 DOCS_DIR = REPO_ROOT / "docs"
@@ -30,9 +29,7 @@ def ensure_repo_directories() -> None:
         CLASSIC_REPORTS_DIR,
         DEEP_LEARNING_ARTIFACTS_DIR,
         DEEP_LEARNING_REPORTS_DIR,
-        LEGACY_MODELS_DIR,
         DOCS_DIR,
         VALIDATION_DIR,
     ]:
         directory.mkdir(parents=True, exist_ok=True)
-

@@ -19,4 +19,4 @@ Implementasi utama app sekarang ada di `apps/local/app.py`.
 
 - folder deploy Hugging Face Space sekarang ada di `apps/hf_space/`
 - artefak production utama ada di `artifacts/classic_ml/`
-- `project-ml/models/` tetap diisi untuk menjaga kompatibilitas dengan alur lama
+- `project-ml/models/` bukan lagi source of truth production

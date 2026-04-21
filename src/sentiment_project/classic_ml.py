@@ -12,7 +12,7 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 
-from .config import CLASSIC_ARTIFACTS_DIR, CLASSIC_REPORTS_DIR, LEGACY_MODELS_DIR, PROCESSED_DATA_PATH, RAW_DATA_PATH, ensure_repo_directories
+from .config import CLASSIC_ARTIFACTS_DIR, CLASSIC_REPORTS_DIR, PROCESSED_DATA_PATH, RAW_DATA_PATH, ensure_repo_directories
 from .shared import ARTIFACT_FILENAMES, NUMERIC_FEATURE_COLUMNS, TARGET_COLUMN, load_sentiment_dataset, prepare_training_dataframe
 
 
@@ -177,10 +177,4 @@ def save_classic_outputs(result: dict) -> ClassicArtifacts:
     paths.summary_path.write_text(build_classic_summary(result["metrics"]), encoding="utf-8")
     paths.metrics_path.write_text(json.dumps(result["metrics"], indent=2), encoding="utf-8")
     paths.report_path.write_text(build_classic_evaluation_markdown(result["metrics"]), encoding="utf-8")
-
-    for source in [paths.model_path, paths.vectorizer_path, paths.encoder_path, paths.scaler_path, paths.summary_path]:
-        target = LEGACY_MODELS_DIR / source.name
-        target.write_bytes(source.read_bytes())
-
     return paths
-

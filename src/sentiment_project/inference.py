@@ -6,7 +6,7 @@ from pathlib import Path
 import joblib
 import numpy as np
 
-from .config import CLASSIC_ARTIFACTS_DIR, LEGACY_MODELS_DIR, REPO_ROOT
+from .config import CLASSIC_ARTIFACTS_DIR, REPO_ROOT
 from .shared import (
     ARTIFACT_FILENAMES,
     NUMERIC_FEATURE_COLUMNS,
@@ -26,7 +26,6 @@ def configure_repo_path() -> None:
 def get_artifact_dirs(extra_dirs: list[Path] | None = None) -> list[Path]:
     candidates = [
         CLASSIC_ARTIFACTS_DIR,
-        LEGACY_MODELS_DIR,
         Path.cwd() / "models",
         Path.cwd(),
     ]

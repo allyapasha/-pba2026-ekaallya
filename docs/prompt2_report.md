@@ -15,7 +15,7 @@ Prompt 2 menyelesaikan empat area utama:
 - Pipeline production dipisah ke `pipelines/classic_ml/`.
 - Baseline neural dipisah ke `pipelines/deep_learning/`.
 - Artefak production dipindah ke `artifacts/classic_ml/`.
-- Artefak eksperimen neural dipindah ke `artifacts/deep_learning/`.
+- Output eksperimen neural diarahkan ke `artifacts/deep_learning/` bila training dijalankan.
 - App lokal production dipusatkan di `apps/local/app.py`.
 - Paket deploy Hugging Face Space dipusatkan di `apps/hf_space/`.
 - Entrypoint lama tetap hidup melalui wrapper:
@@ -55,4 +55,3 @@ Smoke test berhasil untuk contoh berikut:
 - Folder deploy final: `apps/hf_space/`
 - Artefak production terbaru sudah disalin ke folder tersebut
 - Panduan deploy ada di `HF_SPACE_UPLOAD.md`
-

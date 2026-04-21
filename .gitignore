@@ -1,2 +1,4 @@
 __pycache__/
 *.pyc
+project-ml/models/
+artifacts/deep_learning/

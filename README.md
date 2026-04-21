@@ -22,7 +22,7 @@ Output sistem tetap tiga kelas: `positive`, `negative`, dan `neutral`.
 - `artifacts/classic_ml/`
   - artefak model production dan laporan evaluasi
 - `artifacts/deep_learning/`
-  - artefak baseline neural dan catatan eksperimen
+  - output eksperimen neural bila training dijalankan manual
 - `docs/`
   - audit dataset, laporan Prompt 2, perbandingan model, dan handoff lanjutan
 - `validation/smoke_test.py`
@@ -107,4 +107,3 @@ Panduan langkah demi langkah ada di [HF_SPACE_UPLOAD.md](HF_SPACE_UPLOAD.md).
 - `docs/classic_vs_deep_learning.md`
 - `docs/prompt2_report.md`
 - `docs/prompt3_handoff.md`
-

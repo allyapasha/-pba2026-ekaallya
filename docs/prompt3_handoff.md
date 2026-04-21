@@ -14,12 +14,12 @@ Repo sudah memiliki struktur yang lebih jelas untuk production dan eksperimen.
 ### Jalur eksperimen neural
 
 - training: `python pipelines/deep_learning/train.py`
-- artefak: `artifacts/deep_learning/`
+- output eksperimen: `artifacts/deep_learning/`
 
 ## Hal Yang Sudah Stabil
 
 - output app tetap 3 kelas
-- artefak production tersimpan di `artifacts/classic_ml/` dan disalin ke `project-ml/models/`
+- artefak production tersimpan di `artifacts/classic_ml/`
 - folder Hugging Face Space sudah siap upload
 - dokumentasi utama sudah diperbarui
 
@@ -37,4 +37,3 @@ Repo sudah memiliki struktur yang lebih jelas untuk production dan eksperimen.
 3. coba baseline transformer kecil yang benar-benar sequence-aware
 4. tambah test otomatis untuk path training, inferensi, dan deploy Space
 5. bila baseline neural sudah matang, pertimbangkan jalur deploy terpisah untuk model neural
-
